@@ -5,6 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 /**
  * A class to represent a user.
@@ -30,6 +31,9 @@ public class User {
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ArrayList<Order> orders = new ArrayList<>();
+
 
     /**
      * Instantiates a new User.
@@ -50,6 +54,43 @@ public class User {
         this.userName = userName;
     }
 
+    /**
+     * Add order.
+     *
+     * @param order the order
+     */
+    public void addOrder(Order order) {
+        orders.add(order);
+        order.setUser(this);
+    }
+
+    /**
+     * Remove order.
+     *
+     * @param order the order
+     */
+    public void removeOrder(Order order) {
+        orders.remove(order);
+        order.setUser(null);
+    }
+
+    /**
+     * Gets orders.
+     *
+     * @return the orders
+     */
+    public ArrayList<Order> getOrders() {
+        return orders;
+    }
+
+    /**
+     * Sets orders.
+     *
+     * @param orders the orders
+     */
+    public void setOrders(ArrayList<Order> orders) {
+        this.orders = orders;
+    }
 
     /**
      * Gets first name.

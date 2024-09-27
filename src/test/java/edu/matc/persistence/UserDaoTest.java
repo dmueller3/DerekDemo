@@ -54,6 +54,7 @@ class UserDaoTest {
 
     @Test
     void delete() {
+        userDao = new UserDao();
         userDao.delete(userDao.getById(2));
         assertNull(userDao.getById(2));
     }

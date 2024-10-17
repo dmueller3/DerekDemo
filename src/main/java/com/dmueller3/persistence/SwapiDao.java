@@ -10,6 +10,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 
 public class SwapiDao {
+
     Planet getPlanet() {
         Client client = ClientBuilder.newClient();
         WebTarget target =
